@@ -1,1 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <title>Diya ❤️ Sahib</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Georgia, "Times New Roman", serif;
+      color: #421111;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at top left, rgba(255, 215, 220, 0.18), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(255, 180, 190, 0.14), transparent 34%),
+        linear-gradient(135deg, #2b050b, #6d1320, #3a0610);
+      position: relative;
+    }
+
+    body::before {
+      content: "♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥";
+      position: fixed;
+      inset: -80px;
+      color: rgba(255, 230, 235, 0.08);
+      font-size: 45px;
+      line-height: 2.4;
+      letter-spacing: 28px;
+      transform: rotate(-12deg);
+      pointer-events: none;
+      white-space: pre-wrap;
+      z-index: 0;
+    }
+
+    .title {
+      position: fixed;
+      top: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      text-align: center;
+      color: #ffe8df;
+      font-size: clamp(30px, 5vw, 54px);
+      letter-spacing: 1px;
+      text-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .polaroid-wall {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .polaroid {
+      position: absolute;
+      width: 165px;
+      background: #fff8ef;
+      padding: 10px 10px 34px;
+      border-radius: 5px;
+      box-shadow: 0 17px 38px rgba(0, 0, 0, 0.42);
+      opacity: 0.96;
+    }
+
+    .polaroid img {
+      width: 100%;
+      height: 135px;
+      object-fit: cover;
+      display: block;
+      border-radius: 2px;
+    }
+
+    .polaroid::after {
+      content: "♡";
+      position: absolute;
+      bottom: 7px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #8e1d2d;
+      font-size: 19px;
+    }
+
+    .p1 { top: 95px; left: 40px; transform: rotate(-10deg); }
+    .p2 { top: 115px; right: 42px; transform: rotate(9deg); }
+    .p3 { top: 285px; left: 15px; transform: rotate(8deg); }
+    .p4 { top: 300px; right: 18px; transform: rotate(-8deg); }
+    .p5 { bottom: 55px; left: 55px; transform: rotate(11deg); }
+    .p6 { bottom: 65px; right: 55px; transform: rotate(-11deg); }
+    .p7 { top: 55%; left: 210px; transform: rotate(-6deg); opacity: 0.74; }
+    .p8 { top: 55%; right: 210px; transform: rotate(6deg); opacity: 0.74; }
+    .p9 { top: 38px; left: 255px; transform: rotate(7deg); opacity: 0.8; }
+    .p10 { top: 42px; right: 255px; transform: rotate(-7deg); opacity: 0.8; }
+    .p11 { bottom: 28px; left: 50%; transform: translateX(-50%) rotate(3deg); opacity: 0.66; }
+
+    .page {
+      position: relative;
+      min-height: 100vh;
+      padding: 110px 20px 45px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 3;
+    }
+
+    .letter-stage {
+      width: min(92vw, 525px);
+      position: relative;
+      z-index: 5;
+    }
+
+    .letter {
+      position: relative;
+      width: 100%;
+      min-height: 455px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(91, 45, 20, 0.35);
+      background:
+        repeating-linear-gradient(
+          0deg,
+          rgba(100, 55, 26, 0.045) 0px,
+          rgba(100, 55, 26, 0.045) 1px,
+          transparent 1px,
+          transparent 27px
+        ),
+        linear-gradient(145deg, #fff3cf, #e3c28c);
+      box-shadow:
+        0 32px 75px rgba(0, 0, 0, 0.52),
+        inset 0 0 55px rgba(89, 48, 18, 0.18);
+    }
+
+    .letter::before,
+    .letter::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background:
+        linear-gradient(145deg, rgba(255, 245, 207, 0.9), rgba(202, 156, 91, 0.38));
+      z-index: 5;
+      transition: transform 1s ease, opacity 0.8s ease;
+      pointer-events: none;
+    }
+
+    .letter::before {
+      top: 0;
+      transform-origin: top;
+      border-bottom: 1px solid rgba(91, 45, 20, 0.22);
+    }
+
+    .letter::after {
+      bottom: 0;
+      transform-origin: bottom;
+      border-top: 1px solid rgba(91, 45, 20, 0.22);
+    }
+
+    .fold-line {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 100%;
+      height: 1px;
+      background: rgba(91, 45, 20, 0.22);
+      z-index: 6;
+      pointer-events: none;
+    }
+
+    .ribbon-vertical,
+    .ribbon-horizontal {
+      position: absolute;
+      background: linear-gradient(90deg, #790c1a, #c9213c, #7b0c1b);
+      z-index: 7;
+      box-shadow: 0 7px 17px rgba(0, 0, 0, 0.28);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .ribbon-vertical {
+      width: 34px;
+      height: 100%;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+    }
+
+    .ribbon-horizontal {
+      height: 34px;
+      width: 100%;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+    }
+
+    .seal {
+      position: absolute;
+      width: 84px;
+      height: 84px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle at 30% 25%, #ff7487, #b30f2a 60%, #710818);
+      border-radius: 50%;
+      color: #ffe8e8;
+      font-size: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 8;
+      box-shadow:
+        0 11px 27px rgba(0, 0, 0, 0.38),
+        inset 0 5px 13px rgba(255, 255, 255, 0.18);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .closed-content {
+      position: absolute;
+      inset: 0;
+      z-index: 9;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      padding: 0 32px 48px;
+      text-align: center;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .open-button {
+      border: none;
+      cursor: pointer;
+      padding: 16px 25px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #7a0f1d, #c72b43);
+      color: #fff8f0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 17px;
+      font-weight: bold;
+      box-shadow: 0 13px 28px rgba(90, 3, 20, 0.38);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .open-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 17px 34px rgba(90, 3, 20, 0.48);
+    }
+
+    .letter-content {
+      position: relative;
+      z-index: 4;
+      padding: 54px 42px 42px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease 0.45s, transform 1s ease 0.45s;
+    }
+
+    .letter-content h2 {
+      margin: 0 0 8px;
+      color: #6f1020;
+      font-size: 34px;
+    }
+
+    .day {
+      margin: 0 0 32px;
+      color: #8a4b35;
+      font-size: 15px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .reason-label {
+      margin: 0 0 14px;
+      color: #6f1020;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .reason {
+      max-width: 390px;
+      margin: 0 auto 30px;
+      color: #3f1810;
+      font-size: clamp(25px, 5vw, 38px);
+      line-height: 1.25;
+    }
+
+    .signature {
+      margin: 26px 0 18px;
+      color: #6f1020;
+      font-size: 19px;
+    }
+
+    .song-button {
+      border: 1px solid rgba(111, 16, 32, 0.28);
+      cursor: pointer;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: rgba(111, 16, 32, 0.12);
+      color: #6f1020;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 15px;
+      font-weight: bold;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .song-button:hover {
+      background: rgba(111, 16, 32, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .spotify-player {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      margin-top: 0;
+      transition: max-height 0.7s ease, opacity 0.5s ease, margin-top 0.5s ease;
+    }
+
+    .spotify-player.show {
+      max-height: 180px;
+      opacity: 1;
+      margin-top: 18px;
+    }
+
+    .tiny-note {
+      margin-top: 16px;
+      color: #8a4b35;
+      font-size: 13px;
+    }
+
+    .letter.open::before {
+      transform: rotateX(82deg);
+      opacity: 0;
+    }
+
+    .letter.open::after {
+      transform: rotateX(-82deg);
+      opacity: 0;
+    }
+
+    .letter.open .ribbon-vertical {
+      opacity: 0;
+      transform: translateX(-50%) scaleY(0.2);
+    }
+
+    .letter.open .ribbon-horizontal {
+      opacity: 0;
+      transform: translateY(-50%) scaleX(0.2);
+    }
+
+    .letter.open .seal {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.5) rotate(25deg);
+    }
+
+    .letter.open .closed-content {
+      opacity: 0;
+      transform: translateY(20px);
+      pointer-events: none;
+    }
+
+    .letter.open .letter-content {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .floating-heart {
+      position: fixed;
+      bottom: -35px;
+      color: rgba(255, 225, 230, 0.45);
+      font-size: 22px;
+      z-index: 2;
+      pointer-events: none;
+      animation: floatUp 8s linear infinite;
+    }
+
+    .floating-heart:nth-child(1) { left: 12%; animation-delay: 0s; }
+    .floating-heart:nth-child(2) { left: 28%; animation-delay: 1.5s; font-size: 16px; }
+    .floating-heart:nth-child(3) { left: 48%; animation-delay: 3s; font-size: 25px; }
+    .floating-heart:nth-child(4) { left: 68%; animation-delay: 2s; font-size: 18px; }
+    .floating-heart:nth-child(5) { left: 84%; animation-delay: 4s; font-size: 23px; }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+
+      12% {
+        opacity: 1;
+      }
+
+      to {
+        transform: translateY(-115vh) rotate(42deg);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 850px) {
+      .title {
+        top: 18px;
+        font-size: 34px;
+      }
+
+      .page {
+        padding-top: 95px;
+      }
+
+      .letter {
+        min-height: 470px;
+      }
+
+      .letter-content {
+        padding: 48px 28px 36px;
+      }
+
+      .letter-content h2 {
+        font-size: 31px;
+      }
+
+      .polaroid {
+        width: 115px;
+        padding: 7px 7px 25px;
+        opacity: 0.74;
+      }
+
+      .polaroid img {
+        height: 92px;
+      }
+
+      .p1 { top: 98px; left: -13px; }
+      .p2 { top: 98px; right: -13px; }
+      .p3 { top: auto; bottom: 92px; left: -18px; }
+      .p4 { top: auto; bottom: 92px; right: -18px; }
+      .p5 { bottom: 6px; left: 38px; }
+      .p6 { bottom: 6px; right: 38px; }
+
+      .p7,
+      .p8,
+      .p9,
+      .p10,
+      .p11 {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h1 class="title">Diya ❤️ Sahib</h1>
+
+  <div class="floating-heart">♥</div>
+  <div class="floating-heart">♥</div>
+  <div class="floating-heart">♥</div>
+  <div class="floating-heart">♥</div>
+  <div class="floating-heart">♥</div>
+
+  <div class="polaroid-wall">
+    <div class="polaroid p1"><img src="images/photo1.jpg" alt="Memory 1"></div>
+    <div class="polaroid p2"><img src="images/photo2.jpg" alt="Memory 2"></div>
+    <div class="polaroid p3"><img src="images/photo3.jpg" alt="Memory 3"></div>
+    <div class="polaroid p4"><img src="images/photo4.jpg" alt="Memory 4"></div>
+    <div class="polaroid p5"><img src="images/photo5.jpg" alt="Memory 5"></div>
+    <div class="polaroid p6"><img src="images/photo6.jpg" alt="Memory 6"></div>
+    <div class="polaroid p7"><img src="images/photo7.jpg" alt="Memory 7"></div>
+    <div class="polaroid p8"><img src="images/photo8.jpg" alt="Memory 8"></div>
+    <div class="polaroid p9"><img src="images/photo9.jpg" alt="Memory 9"></div>
+    <div class="polaroid p10"><img src="images/photo10.jpg" alt="Memory 10"></div>
+    <div class="polaroid p11"><img src="images/photo11.jpg" alt="Memory 11"></div>
+  </div>
+
+  <main class="page">
+    <section class="letter-stage">
+      <div class="letter" id="letter">
+        <div class="fold-line"></div>
+
+        <div class="ribbon-vertical"></div>
+        <div class="ribbon-horizontal"></div>
+        <div class="seal">♥</div>
+
+        <div class="closed-content">
+          <button class="open-button" id="openButton">
+            Today's Reason Why I Love You
+          </button>
+        </div>
+
+        <div class="letter-content">
+          <h2>My Love,</h2>
+
+          <p class="day">Day 1</p>
+
+          <p class="reason-label">Reason #1 why I love you:</p>
+
+          <!-- EDIT THIS PART EACH DAY -->
+          <p class="reason">
+            The way you make me happy instantly on a bad day.
+          </p>
+          <!-- EDIT THIS PART EACH DAY -->
+
+          <p class="signature">
+            Forever yours,<br>
+            Sahib
+          </p>
+
+          <button class="song-button" id="songButton">
+            ♫ Our Song
+          </button>
+
+          <div class="spotify-player" id="spotifyPlayer">
+            <iframe
+              style="border-radius:12px"
+              src="https://open.spotify.com/embed/track/6RASPUwIAi9dR79fTaMCys?utm_source=generator"
+              width="100%"
+              height="152"
+              frameborder="0"
+              allowfullscreen=""
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy">
+            </iframe>
+          </div>
+
+          <p class="tiny-note">
+            Open this whenever you miss me.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const openButton = document.getElementById("openButton");
+    const letter = document.getElementById("letter");
+
+    const songButton = document.getElementById("songButton");
+    const spotifyPlayer = document.getElementById("spotifyPlayer");
+
+    openButton.addEventListener("click", () => {
+      letter.classList.add("open");
+    });
+
+    songButton.addEventListener("click", () => {
+      spotifyPlayer.classList.toggle("show");
+    });
+  </script>
+</body>
+</html>
