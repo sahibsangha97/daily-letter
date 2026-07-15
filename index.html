@@ -338,6 +338,56 @@
       letter-spacing: 1px;
     }
 
+    .sticky-note {
+      position: absolute;
+      right: calc(50% + 310px);
+      top: 50%;
+      transform: translateY(-50%) rotate(-4deg);
+      width: 270px;
+      min-height: 285px;
+      padding: 24px 22px 22px;
+      background: linear-gradient(135deg, #fff4a8, #f6d96b);
+      color: #2f1d13;
+      z-index: 6;
+      box-shadow:
+        0 18px 35px rgba(0, 0, 0, 0.35),
+        inset 0 -10px 20px rgba(120, 88, 0, 0.08);
+      border-radius: 3px;
+      font-family: "Marker Felt", "Comic Sans MS", "Bradley Hand", cursive;
+    }
+
+    .sticky-note::before {
+      content: "";
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%) rotate(2deg);
+      width: 92px;
+      height: 28px;
+      background: rgba(255, 235, 185, 0.75);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+    }
+
+    .sticky-note h3 {
+      margin: 0 0 16px;
+      text-align: center;
+      font-size: 25px;
+      color: #3c1b12;
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+    }
+
+    .sticky-note ol {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    .sticky-note li {
+      margin-bottom: 13px;
+      font-size: 18px;
+      line-height: 1.25;
+    }
+
     .letter.open::before {
       transform: rotateX(82deg);
       opacity: 0;
@@ -384,11 +434,11 @@
       animation: floatUp 8s linear infinite;
     }
 
-    .floating-heart:nth-child(1) { left: 12%; animation-delay: 0s; }
-    .floating-heart:nth-child(2) { left: 28%; animation-delay: 1.5s; font-size: 16px; }
-    .floating-heart:nth-child(3) { left: 48%; animation-delay: 3s; font-size: 25px; }
-    .floating-heart:nth-child(4) { left: 68%; animation-delay: 2s; font-size: 18px; }
-    .floating-heart:nth-child(5) { left: 84%; animation-delay: 4s; font-size: 23px; }
+    .floating-heart:nth-of-type(1) { left: 12%; animation-delay: 0s; }
+    .floating-heart:nth-of-type(2) { left: 28%; animation-delay: 1.5s; font-size: 16px; }
+    .floating-heart:nth-of-type(3) { left: 48%; animation-delay: 3s; font-size: 25px; }
+    .floating-heart:nth-of-type(4) { left: 68%; animation-delay: 2s; font-size: 18px; }
+    .floating-heart:nth-of-type(5) { left: 84%; animation-delay: 4s; font-size: 23px; }
 
     @keyframes floatUp {
       from {
@@ -414,6 +464,25 @@
 
       .page {
         padding-top: 95px;
+        flex-direction: column;
+      }
+
+      .sticky-note {
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: rotate(-2deg);
+        width: min(86vw, 330px);
+        min-height: auto;
+        margin: 0 auto 24px;
+      }
+
+      .sticky-note h3 {
+        font-size: 23px;
+      }
+
+      .sticky-note li {
+        font-size: 17px;
       }
 
       .letter {
@@ -489,6 +558,15 @@
   </div>
 
   <main class="page">
+    <aside class="sticky-note">
+      <h3>Daily Reminders</h3>
+      <ol>
+        <li>You deserve to be exactly where you are</li>
+        <li>You are the most beautiful girl in the world</li>
+        <li>You make everyone's life better by simply being in it</li>
+      </ol>
+    </aside>
+
     <section class="letter-stage">
       <div class="letter" id="letter">
         <div class="fold-line"></div>
