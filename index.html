@@ -388,45 +388,6 @@
       line-height: 1.25;
     }
 
-    .quote-cluster {
-      position: absolute;
-      left: calc(50% + 315px);
-      top: 50%;
-      transform: translateY(-50%);
-      width: 255px;
-      min-height: 420px;
-      z-index: 6;
-      pointer-events: none;
-    }
-
-    .quote {
-      position: absolute;
-      width: 230px;
-      color: rgba(255, 247, 247, 0.95);
-      font-family: "Bradley Hand", "Segoe Print", "Comic Sans MS", cursive;
-      font-size: 24px;
-      line-height: 1.3;
-      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
-    }
-
-    .q1 {
-      top: -155px;
-      left: 0;
-      transform: rotate(-4deg);
-    }
-
-    .q2 {
-      top: 18px;
-      left: 18px;
-      transform: rotate(3deg);
-    }
-
-    .q3 {
-      top: 190px;
-      left: -4px;
-      transform: rotate(-2deg);
-    }
-
     .letter.open::before {
       transform: rotateX(82deg);
       opacity: 0;
@@ -523,32 +484,6 @@
 
       .sticky-note li {
         font-size: 16px;
-      }
-
-      .quote-cluster {
-        position: relative;
-        left: auto;
-        top: auto;
-        transform: none;
-        width: min(88vw, 340px);
-        min-height: auto;
-        margin: 24px auto 0;
-        display: flex;
-        flex-direction: column;
-        gap: 18px;
-      }
-
-      .quote {
-        position: relative;
-        width: 100%;
-        top: auto;
-        left: auto;
-        text-align: center;
-        font-size: 22px;
-      }
-
-      .q1, .q2, .q3 {
-        transform: none;
       }
 
       .letter {
@@ -691,12 +626,6 @@
         </div>
       </div>
     </section>
-
-    <div class="quote-cluster">
-      <p class="quote q1">"Distance is just a test to see how far love will travel."</p>
-      <p class="quote q2">"Distance gives us a reason to love harder."</p>
-      <p class="quote q3">"No matter how far apart we are, my heart is always with you."</p>
-    </div>
   </main>
 
   <script>
