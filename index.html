@@ -374,32 +374,22 @@
     }
 
     .music-panel {
-      position: absolute;
-      left: calc(50% + 315px);
-      top: 52%;
-      transform: translateY(-50%) rotate(3deg);
-      width: 250px;
+      position: fixed;
+      left: 50%;
+      bottom: 34px;
+      transform: translateX(-50%);
+      width: min(760px, calc(100vw - 40px));
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
       z-index: 6;
-      text-align: center;
-      color: #fff8f0;
-      font-family: "Bradley Hand", "Segoe Print", "Comic Sans MS", cursive;
-      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
-    }
-
-    .music-panel h3 {
-      margin: 0 0 14px;
-      font-size: 29px;
-      font-weight: normal;
+      pointer-events: none;
     }
 
     .music-card {
-      margin-bottom: 18px;
-      padding: 14px 12px;
-      border-radius: 18px;
-      background: rgba(255, 245, 245, 0.12);
-      border: 1px solid rgba(255, 245, 245, 0.18);
-      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.24);
-      backdrop-filter: blur(3px);
+      width: 240px;
+      pointer-events: auto;
+      text-align: center;
     }
 
     .song-button {
@@ -413,6 +403,9 @@
       font-family: Georgia, "Times New Roman", serif;
       font-size: 15px;
       font-weight: bold;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.24);
+      text-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(3px);
       transition: background 0.2s ease, transform 0.2s ease;
     }
 
@@ -425,14 +418,14 @@
       max-height: 0;
       overflow: hidden;
       opacity: 0;
-      margin-top: 0;
-      transition: max-height 0.7s ease, opacity 0.5s ease, margin-top 0.5s ease;
+      margin-bottom: 0;
+      transition: max-height 0.7s ease, opacity 0.5s ease, margin-bottom 0.5s ease;
     }
 
     .spotify-player.show {
       max-height: 180px;
       opacity: 1;
-      margin-top: 14px;
+      margin-bottom: 12px;
     }
 
     .letter.open::before {
@@ -569,14 +562,17 @@
       .music-panel {
         position: relative;
         left: auto;
-        top: auto;
-        transform: rotate(1deg);
+        bottom: auto;
+        transform: none;
         width: min(86vw, 330px);
         margin: 24px auto 0;
+        flex-direction: column;
+        gap: 16px;
+        pointer-events: auto;
       }
 
-      .music-panel h3 {
-        font-size: 28px;
+      .music-card {
+        width: 100%;
       }
 
       .polaroid {
@@ -681,13 +677,7 @@
     </section>
 
     <aside class="music-panel">
-      <h3>Our Songs</h3>
-
       <div class="music-card">
-        <button class="song-button" id="rabbButton">
-          ♫ Rabb Khair Kare
-        </button>
-
         <div class="spotify-player" id="rabbPlayer">
           <iframe
             style="border-radius:12px"
@@ -700,17 +690,17 @@
             loading="lazy">
           </iframe>
         </div>
+
+        <button class="song-button" id="rabbButton">
+          ♫ Our Song (Punjabi)
+        </button>
       </div>
 
       <div class="music-card">
-        <button class="song-button" id="riskButton">
-          ♫ Our Song
-        </button>
-
         <div class="spotify-player" id="riskPlayer">
           <iframe
             style="border-radius:12px"
-            src="https://open.spotify.com/embed/track/5y2ijHECwFYWqcAHKTZgzD?utm_source=generator"
+            src="https://open.spotify.com/embed/track/3wNM5CvwPZz5GvtuoPBOOy?utm_source=generator"
             width="100%"
             height="152"
             frameborder="0"
@@ -719,6 +709,10 @@
             loading="lazy">
           </iframe>
         </div>
+
+        <button class="song-button" id="riskButton">
+          ♫ Our Song (English)
+        </button>
       </div>
     </aside>
   </main>
@@ -728,7 +722,7 @@
       DAILY EDIT SECTION:
       Change only these two lines each day.
     */
-    const todaysDate = "July 7, 2026";
+    const todaysDate = "July 20, 2026";
     const todaysReason = "The way you make me happy instantly on a bad day.";
 
     document.getElementById("outsideDate").textContent = todaysDate;
